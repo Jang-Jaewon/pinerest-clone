@@ -42,6 +42,7 @@ class AccountDetailView(DetailView):
 # 프로필 수정 CBV : AccountCreateView과 거의 유사
 class AccountUpdateView(UpdateView):
     model = User  # 👈 Django의 내장된 User 모델 사용
+    context_object_name = "target_user"
     form_class = forms.AccountUpdateForm  # 👈 UserCreationForm 상속 후 username필드 disabled
     success_url = reverse_lazy(
         "accountapp:hello_world"
@@ -51,5 +52,6 @@ class AccountUpdateView(UpdateView):
 
 class AccountDeleteView(DeleteView):
     model = User  # 👈 Django의 내장된 User 모델 사용
+    context_object_name = "target_user"
     success_url = reverse_lazy("accountapp:login")  # 👈 성공 시, 이동할 곳
     template_name = "accountapp/delete.html"  # 👈 삭제 페이지
