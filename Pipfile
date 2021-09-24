@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 django-environ = "*"
 django-dotenv = "*"
+django-bootstrap4 = "*"
 
 [dev-packages]
 
