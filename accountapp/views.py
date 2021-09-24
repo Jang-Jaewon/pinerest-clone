@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, DeleteView, UpdateView
 from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 # Create your views here.
@@ -17,3 +18,11 @@ class AccountCreateView(CreateView):
         "accountapp:hello_world"
     )  # 👈 성공 시 이동할 곳, 반드시 reverse_lazy
     template_name = "accountapp/create.html"  # 👈 입력 받을 Template
+
+
+class AccountLoginView(LoginView):
+    template_name = "accountapp/login.html"
+
+
+class AccountLogoutView(LogoutView):
+    pass
