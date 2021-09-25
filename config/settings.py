@@ -26,7 +26,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-PROJECT_APPS = ["accountapp", "profileapp"]
+PROJECT_APPS = ["accountapp", "profileapp", "articleapp"]
 
 THIRD_PARTY_APPS = ["bootstrap4"]
 
