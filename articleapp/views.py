@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.generic import (
-    TemplateView,
+    ListView,
     CreateView,
     DetailView,
     UpdateView,
@@ -15,8 +14,11 @@ from .decorators import article_ownership_required
 
 
 # Create your views here.
-class ArticleListView(TemplateView):
+class ArticleListView(ListView):
+    model = models.Article
+    context_object_name = "article_list"
     template_name = "articleapp/list.html"
+    paginate_by = 10
 
 
 @method_decorator(login_required, "get")
