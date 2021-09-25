@@ -26,7 +26,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-PROJECT_APPS = ["accountapp"]
+PROJECT_APPS = ["accountapp", "profileapp"]
 
 THIRD_PARTY_APPS = ["bootstrap4"]
 
@@ -115,6 +115,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
