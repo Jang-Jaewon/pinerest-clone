@@ -8,8 +8,10 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+from django.views.generic.edit import FormMixin
 from . import models
 from . import forms
+from commentapp import forms as commentforms
 from .decorators import article_ownership_required
 
 
@@ -38,8 +40,9 @@ class ArticleCreateView(CreateView):
         return reverse("articleapp:detail", kwargs={"pk": self.object.pk})
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView, FormMixin):
     model = models.Article
+    form_class = commentforms.CommentCreationForm
     context_object_name = "target_article"
     template_name = "articleapp/detail.html"
 
