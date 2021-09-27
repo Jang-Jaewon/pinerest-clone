@@ -2,12 +2,14 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
-from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from accountapp.decorators import account_ownership_required
+from django.views.generic.list import MultipleObjectMixin
+from django.contrib.auth.models import User
+from articleapp import models as articleappModels
 from . import forms
 
 has_ownership = [login_required, account_ownership_required]
@@ -43,10 +45,17 @@ class AccountLogoutView(LogoutView):
 
 
 # 프로필 보기 CBV
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     context_object_name = "target_user"
     template_name = "accountapp/detail.html"
+    paginate_by = 25
+
+    def get_context_data(self, **kwargs):
+        object_list = articleappModels.Article.objects.filter(writer=self.get_object())
+        return super(AccountDetailView, self).get_context_data(
+            object_list=object_list, **kwargs
+        )
 
 
 # 프로필 수정 CBV : AccountCreateView과 거의 유사

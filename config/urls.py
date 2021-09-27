@@ -9,4 +9,5 @@ urlpatterns = [
     path("profiles/", include("profileapp.urls", namespace="profileapp")),
     path("articles/", include("articleapp.urls", namespace="articleapp")),
     path("comments/", include("commentapp.urls", namespace="commentapp")),
+    path("projects/", include("projectapp.urls", namespace="projectapp")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
